@@ -1,3 +1,3 @@
-Pera;Peric;pera@email.com;pera;pera
-Jovana;Jovanovic;jj@email.com;jovana;jj123
-Stojanka;Novakovic;st.nov@email.com;st.nov;100ja
+1;Pera;123;Pera;Peric;Male;1999/12/12;menager;12;bronze
+2;Maja;123;Maja;Mihic;Female;1998/11/12;administrator;15;silver
+3;Nemanja;123;Nemanja;Kukic;Male;1991/05/12;buyer;20;null

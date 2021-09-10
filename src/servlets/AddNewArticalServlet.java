@@ -13,15 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ApplicationContext;
+import beans.ArticalType;
 import beans.Gender;
+import beans.Location;
+import beans.Restaurant;
 import beans.Role;
 import beans.User;
+import dao.ArticalDAO;
+import dao.RestaurantDAO;
 import dao.UserDAO;
 
-public class AddMenagerServlet extends HttpServlet {
+public class AddNewArticalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	public AddMenagerServlet()
+	public AddNewArticalServlet()
 	{
 		super();
 		
@@ -41,7 +46,7 @@ public class AddMenagerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
     	
-    	RequestDispatcher disp = request.getRequestDispatcher("/JSP/addMenager.jsp");
+    	RequestDispatcher disp = request.getRequestDispatcher("/JSP/addNewArticalServlet.jsp");
     	disp.forward(request, response);
     }
     
@@ -57,7 +62,7 @@ public class AddMenagerServlet extends HttpServlet {
     		disp.forward(request, response);
     		return;
     	}
-    	if(!user.getRole().equals(Role.administator))
+    	if(!user.getRole().equals(Role.menager))
     	{
     		RequestDispatcher disp = request.getRequestDispatcher("/JPS/index.jsp");
     		disp.forward(request, response);
@@ -65,48 +70,40 @@ public class AddMenagerServlet extends HttpServlet {
     	}
     	
     	
-    	String username = (String)request.getParameter("username");
-    	String password = (String)request.getParameter("password");
-    	String name = (String)request.getParameter("name");
-    	String surname = (String)request.getParameter("surname");
+    	String iD = (String)request.getParameter("iD");
+    	String articalName = (String)request.getParameter("articalName");
     	
-    	String genderString = (String)request.getParameter("gender");
-    	String birthdateString = (String)request.getParameter("birthdate");
-    	String roleString = (String)request.getParameter("role");
+    	String price = (String)request.getParameter("price");
+		Double articalPrice = Double.parseDouble(price);
 		
-    	Gender gender;
-		
-		if(genderString.equals("Male")) {
-			gender = Gender.Male;
-		}
-		else if(genderString.equals("Female"))
+    	String articalTypeString = (String)request.getParameter("articalType");
+    	ArticalType articalType;
+    	
+		if(articalTypeString.equals("Drink"))
 		{
-			gender = Gender.Female;
+			articalType = ArticalType.Drink;
 		}
 		else
 		{
-			gender = Gender.Other;
+			articalType = ArticalType.Food;
 		}
 		
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		
+    	String quantity = (String)request.getParameter("quantity");
+    	String description = (String)request.getParameter("description");
+    	String picture = (String)request.getParameter("picture");
+    	
 		try {
-			Date birthDate = simpleDateFormat.parse(birthdateString);
-			Role role = Role.menager;
-
 			
-	    	String nummberOfPoints = (String)request.getAttribute("nummberOfPoints");
+	    	String restaurantId = (String)request.getParameter("restaurantId");
 	    	
-
-	    	String typeOfBuyerString = (String)request.getAttribute("typeOfBuyer");
-	    	
-	    	
-	    	UserDAO userDAO = new UserDAO();
-	    	userDAO.saveUser(username, password,  name,surname, gender.toString(), birthdateString , role,  nummberOfPoints, typeOfBuyerString );
+	    	RestaurantDAO restaurantDAO = new RestaurantDAO();
+	    	Restaurant restaurant = restaurantDAO.findById(restaurantId);
+			
+	    	ArticalDAO articalDAO = new ArticalDAO();
+	    	articalDAO.saveArtical(articalName, price,  articalType,quantity, description, picture , restaurant);
 	    	RequestDispatcher disp = request.getRequestDispatcher("/JSP/addMenager.jsp");
         	disp.forward(request, response);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -114,3 +111,4 @@ public class AddMenagerServlet extends HttpServlet {
     }
 
 }
+

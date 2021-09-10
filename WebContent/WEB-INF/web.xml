@@ -45,5 +45,53 @@
     <servlet-name>AddMenagerServlet</servlet-name>
     <url-pattern>/AddMenagerServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddRestaurantServlet</servlet-name>
+    <servlet-class>servlets.AddRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddRestaurantServlet</servlet-name>
+    <url-pattern>/AddRestaurantServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewRestaurantsServlet</servlet-name>
+    <servlet-class>servlets.ViewRestaurantsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewRestaurantsServlet</servlet-name>
+    <url-pattern>/ViewRestaurantsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewRestaurantServlet</servlet-name>
+    <servlet-class>servlets.ViewRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewRestaurantServlet</servlet-name>
+    <url-pattern>/ViewRestaurantServlet</url-pattern>
+  </servlet-mapping>
   
+  <servlet>
+    <servlet-name>ViewArticalServlet</servlet-name>
+    <servlet-class>servlets.ViewArticalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewArticalServlet</servlet-name>
+    <url-pattern>/ViewArticalServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddCommentServlet</servlet-name>
+    <servlet-class>servlets.AddCommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCommentServlet</servlet-name>
+    <url-pattern>/AddCommentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddNewArticalServlet</servlet-name>
+    <servlet-class>servlets.AddNewArticalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNewArticalServlet</servlet-name>
+    <url-pattern>/AddNewArticalServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,16 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ApplicationContext;
+import beans.Artical;
+import dao.ArticalDAO;
 
-/***
- * Servlet za odjavljivanje i poništavanje sesije
- * @author Lazar
- *
- */
-public class LogoutServlet extends HttpServlet {
+public class ViewArticalServlet  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public LogoutServlet() {
+    public ViewArticalServlet() {
         super();
     }
 
@@ -31,7 +29,22 @@ public class LogoutServlet extends HttpServlet {
 		ApplicationContext.getInstane().setContextPath(contextPath);
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO 4: Implementirati logout
+	
+		String id = (String)request.getAttribute("id");
+		
+		ArticalDAO articalDAO = new ArticalDAO();
+		Artical artical = articalDAO.findById(id);
+		
+		request.setAttribute("artical",artical);
+		
+		RequestDispatcher disp = request.getRequestDispatcher("/JSP/viewArtical.jsp");
+		disp.forward(request, response);
+		
+	}
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

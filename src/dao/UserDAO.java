@@ -2,6 +2,7 @@ package dao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import beans.ApplicationContext;
@@ -11,6 +12,20 @@ import beans.TypeOfBuyer;
 import beans.User;
 
 public class UserDAO {
+	
+	public ArrayList<User> getMenagers() {
+		
+		ArrayList<User> users = new ArrayList<User>();
+		
+		for(User user: ApplicationContext.getInstane().getUsers()) 
+		{
+			if(user.getRole().equals(Role.menager)) {
+				users.add(user);
+			}
+		}
+		
+		return users;
+	}
 	
 	public String nextId() {
 		

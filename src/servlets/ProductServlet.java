@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.ApplicationContext;
+
 
 /***
  * Servlet zadužen za prikazivanje proizvoda.
@@ -19,13 +21,19 @@ public class ProductServlet extends HttpServlet {
 
     public ProductServlet() {
         super();
+		
     }
+    
+    
     
     @Override
     public void init() throws ServletException { 
     	super.init();
     	ServletContext context = getServletContext();
     	String contextPath = context.getRealPath("");
+    	
+		ApplicationContext.getInstane().setContextPath(contextPath);
+
     	// Dodaju se proizvodi u kontekst kako bi mogli servleti da rade sa njima
     	//context.setAttribute("products", new ProductDAO(contextPath));
     }

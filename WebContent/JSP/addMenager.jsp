@@ -27,7 +27,11 @@
 	</tr>
 	<tr>
 		<td>Gender</td>
-		<td><input type="text" name ="gender"/></td>
+		<td>
+		<select name ="gender">
+			<option value="Femela">Femela</option>
+			<option value="Male">Male</option>
+		</select>
 	</tr>
 	<tr>
 		<td>Birth date</td>
@@ -41,7 +45,7 @@
 		<td>Type of buyer</td>
 		<td><input type="text" name ="typeOfBuyerString"/></td>
 	</tr>
-	<tr><td><input type="submit" value="AddMenager"></td></tr>
+	<tr><td><input type="submit" value="Add Menager"></td></tr>
 </table>
 </form>
 	<!-- Prikaži grešku, ako je bilo -->

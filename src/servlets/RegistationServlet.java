@@ -6,11 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.ApplicationContext;
 import beans.Gender;
 import beans.OrderStatus;
 import beans.Role;
@@ -22,6 +24,21 @@ import dao.UserDAO;
 public class RegistationServlet extends HttpServlet {
 		private static final long serialVersionUID = 1L;
 	      
+		public RegistationServlet()
+		{
+			super();
+			
+		}
+		
+		 public void init() throws ServletException { 
+		    	super.init();
+		    	ServletContext context = getServletContext();
+		    	String contextPath = context.getRealPath("");
+		    	
+				ApplicationContext.getInstane().setContextPath(contextPath);
+		    }
+
+		
 	    @Override
 	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	    {
@@ -40,7 +57,7 @@ public class RegistationServlet extends HttpServlet {
 	    	String surname = (String)request.getParameter("surname");
 	    	
 	    	String genderString = (String)request.getParameter("gender");
-	    	String birthdateString = (String)request.getParameter("birthdate");
+	    	String birthdateString = (String)request.getParameter("birthDate");
 	    	String roleString = (String)request.getParameter("role");
 			
 	    	Gender gender;
@@ -67,7 +84,6 @@ public class RegistationServlet extends HttpServlet {
 				
 		    	String nummberOfPoints = (String)request.getAttribute("nummberOfPoints");
 		    	
-
 		    	String typeOfBuyerString = (String)request.getAttribute("typeOfBuyer");
 		    	
 		    	

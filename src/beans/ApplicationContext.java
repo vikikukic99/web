@@ -1,8 +1,10 @@
 package beans;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,9 +32,19 @@ public class ApplicationContext {
 	private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
 	private ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 	private ArrayList<TypeOfBuyer> typeOfBuyers = new ArrayList<TypeOfBuyer>();
-	
+	private String contextPath = "";
 	
 	public ApplicationContext() {
+	}
+	
+	public String getContextPath()
+	{
+		return contextPath;
+	}
+	
+	public void setContextPath(String contextPath)
+	{
+		this.contextPath = contextPath;
 	}
 	
 	private static ApplicationContext instance = null;
@@ -128,42 +140,61 @@ public class ApplicationContext {
 	
 	public void Load() 
 	{
-		loadUsers("");
-		loadArticals("");
-		loadCart("");
-		loadCartItem("");
-		loadComment("");
-		loadLocation("");
-		loadOrder("");
-		loadOrderItem("");
-		loadRestaurant("");
-		loadTypeOfBuyer("");
+		loadUsers(contextPath);
+		loadArticals(contextPath);
+		loadCart(contextPath);
+		loadCartItem(contextPath);
+		loadComment(contextPath);
+		loadLocation(contextPath);
+		loadOrder(contextPath);
+		loadOrderItem(contextPath);
+		loadRestaurant(contextPath);
+		loadTypeOfBuyer(contextPath);
 		
 		
 	}
 	
 	public void Save()
 	{
-		saveUsers();
-		saveArticals();
-		saveCart();
-		saveCartItem();
-		saveComment();
-		saveLocation();
-		saveOrder();
-		saveOrderItem();
-		saveRestaurant();
-		saveTypeOfBuyer();
+		saveUsers(contextPath);
+		saveArticals(contextPath);
+		saveCart(contextPath);
+		saveCartItem(contextPath);
+		saveComment(contextPath);
+		saveLocation(contextPath);
+		saveOrder(contextPath);
+		saveOrderItem(contextPath);
+		saveRestaurant(contextPath);
+		saveTypeOfBuyer(contextPath);
 	}
 	
 	
-		public void saveArticals()
+		public void saveArticals(String contextPath)
 		{
+			File file = new File(contextPath + "/articals.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(Artical artical : articals)
 			{
-				artical.exportToString();
+				result += artical.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
+		
+		
 		
 		public void loadArticals(String contextPath) 
 		{
@@ -222,11 +253,28 @@ public class ApplicationContext {
 				}
 			}
 
-				public void saveCart()
+				public void saveCart(String contextPath)
 				{
+					File file = new File(contextPath + "/carts.txt");
+					
+					try 
+					{
+						BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+						String result = "";
+						
 					for(Cart cart : carts)
 					{
-						cart.exportToString();
+						result += cart.exportToString() + "\n";
+					}
+					
+					out.write(result);
+					out.close();
+				
+					}
+					
+				catch(Exception e)
+					{
+					
 					}
 				}
 			
@@ -272,13 +320,32 @@ public class ApplicationContext {
 					}
 				}
 	
-			public void saveCartItem()
+			
+			public void saveCartItem(String contextPath)
 			{
+				File file = new File(contextPath + "/cartItems.txt");
+				
+				try 
+				{
+					BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+					String result = "";
+					
 				for(CartItem cartItem : cartItems)
 				{
-					cartItem.exportToString();
+					result += cartItem.exportToString() + "\n";
+				}
+				
+				out.write(result);
+				out.close();
+			
+				}
+				
+			catch(Exception e)
+				{
+				
 				}
 			}
+			
 	
 			public void loadCartItem(String contextPath) {
 					
@@ -323,13 +390,33 @@ public class ApplicationContext {
 				}
 			}
 		
-		public void saveComment()
+
+		public void saveComment(String contextPath)
 		{
+			File file = new File(contextPath + "/comments.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(Comment comment : comments)
 			{
-				comment.exportToString();
+				result += comment.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
+		
+		
 		
 		public void loadComment(String contextPath) {
 			
@@ -399,13 +486,32 @@ public class ApplicationContext {
 			}
 		}
 		
-		public void saveLocation()
+		public void saveLocation(String contextPath)
 		{
+			File file = new File(contextPath + "/locations.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(Location location : locations)
 			{
-				location.exportToString();
+				result += location.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
+		
+		
 		
 		public void loadLocation(String contextPath) {
 			
@@ -426,8 +532,10 @@ public class ApplicationContext {
 						Double geograficalLenght =Double.parseDouble(st.nextToken().trim());
 						Double geograficalWidth =Double.parseDouble(st.nextToken().trim());
 						String adress = st.nextToken().trim();
+						String city = st.nextToken().trim();
+						String country = st.nextToken().trim();
 						
-						locations.add(new Location(iD, geograficalLenght, geograficalWidth, adress));
+						locations.add(new Location(iD, geograficalLenght, geograficalWidth, adress, city, country));
 					}
 					
 				}
@@ -443,11 +551,28 @@ public class ApplicationContext {
 			}
 		}
 		
-		public void saveOrder()
+		public void saveOrder(String contextPath)
 		{
+			File file = new File(contextPath + "/orders.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(Order order : orders)
 			{
-				order.exportToString();
+				result += 	order.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
 		
@@ -533,11 +658,28 @@ public class ApplicationContext {
 			}
 		}
 		
-		public void saveOrderItem()
+		public void saveOrderItem(String contextPath)
 		{
+			File file = new File(contextPath + "/orderItems.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(OrderItem orderItem : orderItems)
 			{
-				orderItem.exportToString();
+				result += 	orderItem.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
 	
@@ -579,13 +721,32 @@ public class ApplicationContext {
 			}
 		}
 		
-		public void saveRestaurant()
+		public void saveRestaurant(String contextPath)
 		{
+			File file = new File(contextPath + "/restaurants.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(Restaurant restaurant : restaurants)
 			{
-				restaurant.exportToString();
+				result += 	restaurant.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
+	
+		
 		
 		public void loadRestaurant(String contextPath) {
 			
@@ -643,14 +804,32 @@ public class ApplicationContext {
 			}
 		}
 		
-		public void saveTypeOfBuyer()
+
+		public void saveTypeOfBuyer(String contextPath)
 		{
+			File file = new File(contextPath + "/typeOfBuyers.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(TypeOfBuyer typeOfBuyer : typeOfBuyers)
 			{
-				typeOfBuyer.exportToString();
+				result += typeOfBuyer.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
-		
+	
 		public void loadTypeOfBuyer(String contextPath) {
 			
 			
@@ -704,13 +883,32 @@ public class ApplicationContext {
 			}
 		}
 		
-		public void saveUsers()
+		public void saveUsers(String contextPath)
 		{
+			File file = new File(contextPath + "/users.txt");
+			
+			try 
+			{
+				BufferedWriter out = new  BufferedWriter(new FileWriter(file));
+				String result = "";
+				
 			for(User user : users)
 			{
-				user.exportToString();
+				result += user.exportToString() + "\n";
+			}
+			
+			out.write(result);
+			out.close();
+		
+			}
+			
+		catch(Exception e)
+			{
+			
 			}
 		}
+	
+		
 		
 		public void loadUsers(String contextPath) {
 			

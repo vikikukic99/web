@@ -6,18 +6,26 @@ public class Location {
 	private double geograficalLenght;
 	private double geograficalWidth;
 	private String adress;
+	private String city;
+	private String country;
 	
 	public String exportToString()
 	{
-		return iD + '|' + geograficalLenght + '|' + geograficalWidth + '|' + adress; 
+		return iD + '|' + geograficalLenght + '|' + geograficalWidth + '|' + adress + '|' + city + '|' + country; 
 	}
 	
-	public Location(String iD, double geograficalLenght, double geograficalWidth, String adress) {
+	public Location()
+	{
+		
+	}
+	public Location(String iD, double geograficalLenght, double geograficalWidth, String adress, String city, String country) {
 		super();
 		this.iD = iD;
 		this.geograficalLenght = geograficalLenght;
 		this.geograficalWidth = geograficalWidth;
 		this.adress = adress;
+		this.city = city;
+		this.country = country;
 	}
 	public String getiD() {
 		return iD;
@@ -42,6 +50,18 @@ public class Location {
 	}
 	public void setAdress(String adress) {
 		this.adress = adress;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.ApplicationContext;
 import beans.User;
 import dao.UserDAO;
 
@@ -19,12 +20,18 @@ public class LoginServlet extends HttpServlet {
        
     public LoginServlet() {
         super();
+        
+
     }
     
     @Override
     public void init() throws ServletException {
     	super.init();
-
+    	
+        ServletContext context = getServletContext();
+		String contextPath = context.getRealPath("");
+		
+		ApplicationContext.getInstane().setContextPath(contextPath);
     }
 
     @Override

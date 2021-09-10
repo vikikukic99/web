@@ -62,6 +62,16 @@ public class Artical {
 	public String getDescription() {
 		return description;
 	}
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -71,5 +81,7 @@ public class Artical {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
+	
+	
 	
 }
