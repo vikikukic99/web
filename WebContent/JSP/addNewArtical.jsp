@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form>
+	<form "/WebShop/ViewArticalServlet" method="POST">
 		<table>
 			<tr>
 				<td>Artical name</td>
@@ -19,11 +19,21 @@
 			</tr>
 			<tr>
 				<td>Price</td>
-				<td><input type="password" name ="price"/></td>
+				<td><input type="text" name ="price"/></td>
 			</tr>
+					
 			<tr>
-				<td>Artical type</td>
-				<td><input type="text" name ="articalType"/></td>
+				<td>Artical Type</td>
+				<td>
+				<select name ="artical type">
+					<option value="Fruit">Fruit</option>
+					<option value="Vegetables">Vegetables</option>
+					<option value="Meat">Meat</option>
+					<option value="Fish">Fish</option>
+					<option value="Pasta">Pasta</option>
+					<option value="Sweets">Sweets</option>
+				</select>
+				</td>
 			</tr>
 			<tr>
 				<td>Quantity</td>
@@ -38,10 +48,9 @@
 				<td><input type="text" name ="picture"/></td>
 			</tr>
 			<tr>
-				<td>Restaurant</td>
-				<td><input type="text" name ="restaurant"/></td>
+				<td><input type="hidden" name ="restaurantId" value="${requestScopre.restourantID}"/></td>
 			</tr>
-			<tr><td><input type="submit" value="ViewArtical"></td>
+			<tr><td><input type="submit" value="Add artical"></td>
 			</tr>
 			</table>
 	</form>

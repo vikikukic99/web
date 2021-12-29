@@ -44,7 +44,10 @@ public class ApplicationContext {
 	
 	public void setContextPath(String contextPath)
 	{
-		this.contextPath = contextPath;
+		if(this.contextPath.equals("")) {
+			this.contextPath = contextPath;
+			Load();
+		}
 	}
 	
 	private static ApplicationContext instance = null;
@@ -53,6 +56,7 @@ public class ApplicationContext {
 		
 		if(instance == null) {
 			instance = new ApplicationContext();
+			
 		}
 		
 		return instance;
@@ -912,7 +916,7 @@ public class ApplicationContext {
 		
 		public void loadUsers(String contextPath) {
 			
-			String pattern = "yyyy-MM-dd";
+			String pattern = "yyyy/MM/dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 			
 			

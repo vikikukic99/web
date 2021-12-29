@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ApplicationContext;
+import beans.Artical;
 import beans.ArticalType;
 import beans.Gender;
 import beans.Location;
@@ -45,8 +46,15 @@ public class AddNewArticalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
+    	String restourantID = (String)request.getParameter("restaurantID");
     	
-    	RequestDispatcher disp = request.getRequestDispatcher("/JSP/addNewArticalServlet.jsp");
+    	RestaurantDAO restaurantDAO = new RestaurantDAO();
+		
+		Restaurant restaurant = restaurantDAO.findById(restourantID);
+		
+    	request.setAttribute("restourantID", restourantID);
+    	
+    	RequestDispatcher disp = request.getRequestDispatcher("/JSP/addNewArtical.jsp");
     	disp.forward(request, response);
     }
     
@@ -56,23 +64,25 @@ public class AddNewArticalServlet extends HttpServlet {
    
     	User user = (User)request.getSession().getAttribute("user");
     	
+    	String restaurantId = (String)request.getParameter("restaurantId");
+    	
+    	RestaurantDAO restaurantDAO = new RestaurantDAO();
+    	Restaurant restaurant = restaurantDAO.findById(restaurantId);
+    	
     	if(user == null)
     	{
-    		RequestDispatcher disp = request.getRequestDispatcher("/JPS/login.jsp");
+    		RequestDispatcher disp = request.getRequestDispatcher("/JSP/login.jsp");
     		disp.forward(request, response);
     		return;
     	}
     	if(!user.getRole().equals(Role.menager))
     	{
-    		RequestDispatcher disp = request.getRequestDispatcher("/JPS/index.jsp");
-    		disp.forward(request, response);
+    		RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+    		rd.forward(request, response);
     		return;
     	}
     	
-    	
-    	String iD = (String)request.getParameter("iD");
-    	String articalName = (String)request.getParameter("articalName");
-    	
+      	String articalName = (String)request.getParameter("articalName");
     	String price = (String)request.getParameter("price");
 		Double articalPrice = Double.parseDouble(price);
 		
@@ -92,21 +102,21 @@ public class AddNewArticalServlet extends HttpServlet {
     	String description = (String)request.getParameter("description");
     	String picture = (String)request.getParameter("picture");
     	
-		try {
-			
-	    	String restaurantId = (String)request.getParameter("restaurantId");
-	    	
-	    	RestaurantDAO restaurantDAO = new RestaurantDAO();
-	    	Restaurant restaurant = restaurantDAO.findById(restaurantId);
-			
-	    	ArticalDAO articalDAO = new ArticalDAO();
-	    	articalDAO.saveArtical(articalName, price,  articalType,quantity, description, picture , restaurant);
-	    	RequestDispatcher disp = request.getRequestDispatcher("/JSP/addMenager.jsp");
-        	disp.forward(request, response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+    	for(Artical artical: ApplicationContext.getInstane().getArticals()) {
+			if(artical.getArticalName().equals(articalName)) {
+				request.setAttribute("error", "Already exists artical with that name!");
+				 RequestDispatcher dispatcher = request.getRequestDispatcher("/AddNewArticalServlet");
+				 dispatcher.forward(request, response);
+				 return;
+			}
 		}
+			
+    	ArticalDAO articalDAO = new ArticalDAO();
+		articalDAO.addArtical( articalName, price, articalType, quantity, description, picture, restaurant);
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/JSP/homePage.jsp");
+		requestDispatcher.forward(request, response);
+		return;
 				 	
     }
 

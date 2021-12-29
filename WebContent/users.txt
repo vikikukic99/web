@@ -1,3 +1,5 @@
-1;Pera;123;Pera;Peric;Male;1999/12/12;menager;12;bronze
-2;Maja;123;Maja;Mihic;Female;1998/11/12;administrator;15;silver
-3;Nemanja;123;Nemanja;Kukic;Male;1991/05/12;buyer;20;null
+1|violeta|violeta|Violeta|Kukic|Female|1999/3/28|Administrator|15|Bronze|
+2|snezana|snezana|Snezana|Kukic|Female|1971/10/6|Manager|10|Silver|
+3|vojislav|vojislav|Vojislav|Djukic|Male|1998/9/8|Buyer|20|Bronze|
+4|natasa|natasa|Natasa|Djukic|Female|1995/9/5|Buyer|11|Bronze|
+5|mladen|mladen|Mladen|Kukic|Male|1966/2/14|Manager|10|Silver|

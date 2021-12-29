@@ -22,7 +22,11 @@
 	<tr>
 		<td>Status</td>
 		<td>
-			<select name="text" name ="status"/></td>
+		<select name ="status">
+			<option value="Open">Open</option>
+			<option value="Close">Close</option>
+		</select>
+		</td>
 	</tr>
 	<tr>
 		<td>Logo of Restaurant</td>
@@ -52,7 +56,7 @@
 	</tr>
 	<tr>
 		<td>Location</td>
-		<td><input type="password" name ="location"/></td>
+		<td><input type="text" name ="location"/></td>
 	</tr>
 	<tr><td><input type="submit" value="Add new restaurant"></td></tr>
 </table>

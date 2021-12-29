@@ -29,8 +29,21 @@ public class RestaurantDAO {
 	
 	public ArrayList<Restaurant> sortbyLocation(ArrayList<Restaurant> restaurants)
 	{
-		restaurants.sort((o1,o2) -> o1.getLocation().getAdress().compareTo(o2.getLocation().getAdress()));
+		restaurants.sort((o1,o2) -> o1.getLocation().getAddress().compareTo(o2.getLocation().getAddress()));
 		return restaurants; 
+	}
+	
+	public String generateID() {
+		int id = 1;
+		
+		for(Restaurant restaurant : ApplicationContext.getInstane().getRestaurants()) {
+			int IDToCompare = Integer.parseInt(restaurant.getRestaurantName());
+			
+			if(IDToCompare > id) {
+				id = IDToCompare;
+			}
+		}
+		return Integer.toString(id+1);
 	}
 	
 	public Restaurant findById(String id)
@@ -62,6 +75,51 @@ public class RestaurantDAO {
 		return Integer.toString(id + 1);
 	}
 	
+	public void addRestaurant(String id, String restaurantName, String restaurantType, Status status, String logoOfRestaurant, Location location, User menager) {
+		
+		String idd = generateID();
+		Status statuss = Status.Close;
+
+		Restaurant restaurant = new Restaurant( id,  restaurantName,  restaurantType,  status,  logoOfRestaurant,  location,  menager);
+		ApplicationContext.getInstane().getRestaurants().add(restaurant);
+		ApplicationContext.getInstane().Save();
+	}
+	
+
+	public ArrayList<Restaurant> searchAllRestourants(String search, String typeOfRestaurant, String restaurantStatus) {
+
+		ArrayList<Restaurant> result = new ArrayList<Restaurant>();
+		
+		String searchString = search == null ? "" : search.toLowerCase();
+		String typeOfRestourantString = typeOfRestaurant == null ? "" : typeOfRestaurant.toLowerCase();
+		String restaurantStatusString = restaurantStatus == null ? "" : restaurantStatus.toLowerCase();
+		
+	
+		
+		for(Restaurant restaurant : ApplicationContext.getInstane().getRestaurants()) {
+			
+
+			if(!(restaurant.getRestaurantName().toLowerCase().contains(searchString)
+					|| restaurant.getLocation().getAddress().toLowerCase().contains(searchString))) {
+				continue;
+			}
+			
+			
+			if((!typeOfRestaurant.equals("") &&
+					!restaurant.getRestaurantType().toLowerCase().equals(typeOfRestourantString))) {
+				continue;
+			}
+			
+			if((!restaurantStatus.equals("") &&
+					!restaurant.getStatus().toString().toLowerCase().equals(restaurantStatusString))) {
+				continue;
+			}
+			
+			
+			result.add(restaurant);
+		}
+		return result;
+		}
 	
 	public void saveRestaurant (String restaurantName, String restaurantType, Status status, String logoOfRestaurant, User menager, Location location)
 	{
@@ -97,11 +155,11 @@ public class RestaurantDAO {
 		
 		for(Restaurant restaurant : ApplicationContext.getInstane().getRestaurants()) {
 			
-				if(restaurant.getRestaurantName().toLowerCase().contains(search) ||
-					restaurant.getRestaurantType().toLowerCase().contains(search) ||
-					restaurant.getLocation().getAdress().toLowerCase().contains(search) ||
-					restaurant.getLocation().getCity().toLowerCase().contains(search) ||
-					restaurant.getLocation().getCountry().toLowerCase().contains(search) ||
+				if(restaurant.getRestaurantName().toLowerCase().contains(search.toLowerCase()) ||
+					restaurant.getRestaurantType().toLowerCase().contains(search.toLowerCase()) ||
+					restaurant.getLocation().getAddress().toLowerCase().contains(search.toLowerCase()) ||
+					restaurant.getLocation().getCity().toLowerCase().contains(search.toLowerCase()) ||
+					restaurant.getLocation().getCountry().toLowerCase().contains(search.toLowerCase()) ||
 					restaurant.getRestaurantType().toLowerCase().equals(restaurantType) ||
 					restaurant.getStatus().equals(restaurantStatus))
 					
@@ -112,4 +170,18 @@ public class RestaurantDAO {
 			return result;
 	}
 
+	public ArrayList<Restaurant> getRestaurantForManager(String managerId) {
+		
+		ArrayList<Restaurant> result = new ArrayList<Restaurant>();
+	
+		for(Restaurant restauran: ApplicationContext.getInstane().getRestaurants()) {
+		
+			if(restauran.getMenager().getID().equals(managerId)) {
+				result.add(restauran);
+			}
+			
+		}
+		
+		return result;
+	}
 }

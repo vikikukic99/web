@@ -25,8 +25,12 @@
 				<td>Artical type</td>
 				<td>
 					<select name = "filter">
-					<option>food</option>
-					<option>drink</option>
+					<option>fruit</option>
+					<option>vegetables</option>
+					<option>meat</option>
+					<option>fish</option>
+					<option>pasta</option>
+					<option>sweets</option>
 					</select>
 				</td>
 			</tr>
@@ -42,7 +46,7 @@
 				<td>Picture</td>
 				<td><input type="text" name ="picture"/></td>
 			</tr>
-			<tr><td><input type= "submit" value= "Add"></td></tr>
+			<tr><td><input type= "submit" value= "View atical"></td></tr>
 			</table>
 	</form>
 		<!-- Prikaži grešku, ako je bilo -->

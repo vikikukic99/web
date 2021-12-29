@@ -42,6 +42,8 @@ public class ViewRestaurantServlet extends HttpServlet {
     	RestaurantDAO restaurantDAO = new RestaurantDAO();
     	Restaurant restaurant = restaurantDAO.findById(restaurantId);
     	
+    	
+    	
     	// naci sve artikle od restorana i proslediti
     	
     	ArticalDAO articalDAO = new ArticalDAO();
@@ -51,8 +53,5 @@ public class ViewRestaurantServlet extends HttpServlet {
     	disp.forward(request, response);
     }
     
-	    	
-    
-
 
 }

@@ -79,15 +79,15 @@ public class AddRestaurantServlet extends HttpServlet {
 		
 		Location location = new Location();
 		
-		String adress = (String)request.getAttribute("adress");
-		location.setAdress(adress);
+		String adress = (String)request.getParameter("adress");
+		location.setAddress(adress);
 		
 
-		Double geograficalLenght = (Double)request.getAttribute("geograficalLenght");
+		Double geograficalLenght = Double.parseDouble(request.getParameter("geograficalLenght")) ;
 		location.setGeograficalLenght(geograficalLenght);
 		
 
-		Double geograficalWidth = (Double)request.getAttribute("geograficalWidth");
+		Double geograficalWidth = Double.parseDouble(request.getParameter("geograficalWidth"));
 		location.setGeograficalWidth(geograficalWidth);
 		
 		RestaurantDAO restaurantDAO = new RestaurantDAO();

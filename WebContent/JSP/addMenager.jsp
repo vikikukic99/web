@@ -29,7 +29,7 @@
 		<td>Gender</td>
 		<td>
 		<select name ="gender">
-			<option value="Femela">Femela</option>
+			<option value="Female">Female</option>
 			<option value="Male">Male</option>
 		</select>
 	</tr>

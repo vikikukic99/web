@@ -47,7 +47,8 @@ public class ArticalDAO {
 		return null;
 	}
 	
-public String nextId() {
+	
+	public String nextId() {
 		
 		int id = 0;
 		
@@ -64,32 +65,52 @@ public String nextId() {
 		return Integer.toString(id + 1);
 	}
 	
-	public void saveArtical (String articalName, String price, ArticalType articalType, String quantity, String description, String picture,Restaurant restaurant)
-	{
-		ArticalType articalTypeOfRestaurant;
-		if(articalType.equals("Drink"))
+		
+		public void addArtical(String articalName, double price, ArticalType articalType, String picture, String description, double quantity, Restaurant restaurant)
 		{
-			articalTypeOfRestaurant = ArticalType.Drink;
-		}
-		else
-		{
-			articalTypeOfRestaurant = ArticalType.Food;
-		}
-		
-		
-		try {
-		
-		Artical artical = new Artical(nextId(), articalName, Double.parseDouble(price), articalTypeOfRestaurant, quantity, description, picture, restaurant);
+			String id = nextId();
 			
-			
+			Artical artical = new Artical(articalName, price, articalType, picture, description, quantity, restaurant);
 			ApplicationContext.getInstane().getArticals().add(artical);
 			ApplicationContext.getInstane().Save();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-	}
-	
+		
+		public void changeArtical(String id,String articalName, double price, ArticalType articalType, String picture, String description, double quantity)
+		{
+			ArticalDAO articalDAO = new ArticalDAO();
+			Artical artical = articalDAO.findById(id);
+			
+			artical.setArticalName(articalName);
+			artical.setPrice(price);
+			artical.setArticalType(articalType);
+			artical.setPicture(picture);
+			artical.setDescription(description);
+			artical.setQuantity(quantity);
+
+			ApplicationContext.getInstane().Save();
+		}
+		
+		public void changeArticalQuantity(String id, double quantity)
+		{
+			ArticalDAO articalDAO = new ArticalDAO();
+			Artical artical = articalDAO.findById(id);
+			artical.setQuantity(quantity);
+			ApplicationContext.getInstane().Save();
+		}
+		
+		public ArrayList<Artical> getArticalsForRestorants(String id)
+		{
+			ArrayList<Artical> resultList = new ArrayList<Artical>();
+			
+			for(Artical artical : ApplicationContext.getInstane().getArticals())
+			{
+				if(artical.getRestaurant().getId().equals(id))
+				{
+					resultList.add(artical);
+				}
+			}
+			
+			return resultList;
+		}
 
 }

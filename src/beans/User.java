@@ -1,5 +1,6 @@
 package beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
@@ -17,7 +18,11 @@ public class User {
 	
 	public String exportToString()
 	{
-		return iD + '|' + username + '|' + password + '|' + name + '|' + surname + gender.toString() + '|' + birthDate.toString() + '|' + role.toString() + '|' + nummberOfPoints + '|' + (typeOfBuyer == null ? "" : typeOfBuyer.toString()); 
+		String pattern = "yyyy/MM/dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		
+		
+		return iD + ';' + username + ';' + password + ';' + name + ';' + surname + ";" + gender.toString() + ';' + simpleDateFormat.format(birthDate) + ';' + role.toString() + ';' + nummberOfPoints + ';' + (typeOfBuyer == null ? "" : typeOfBuyer.toString()); 
 	}
 	
 	public User(String iD, String username, String password, String name, String surname, Gender gender, Date birthDate,
