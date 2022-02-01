@@ -2,75 +2,87 @@ package dao;
 
 import java.util.ArrayList;
 
-import beans.ApplicationContext;
 import beans.Artical;
-import beans.ArticalType;
 import beans.Comment;
+import beans.CommentStatus;
 import beans.Grade;
 import beans.Restaurant;
 import beans.User;
+import beans.WebContext;
 
 public class CommentDAO {
 	
-public String nextId() {
-		
-		int id = 0;
-		
-		for(Comment comment: ApplicationContext.getInstane().getComments()) {
-			
-			int idToCompare = Integer.parseInt(comment.getiD());
-			
-			if(idToCompare > id) {
-				id = idToCompare;
+	public Comment findByID(String id) {
+		for(Comment comment : WebContext.getInstance().getComments()) {			
+		if(comment.getCommentID().equals(id)) {
+				return comment;
 			}
-			
 		}
-		
-		return Integer.toString(id + 1);
+	return null;
 	}
 	
-	
-	
-	public void saveComment (User user, Restaurant restaurant, String commentText, Grade grade)
+	public void getAverageGrade()
 	{
-		
-		Grade gradesOfRestaurant;
-		if(grade.equals("one"))
-		{
-			gradesOfRestaurant = Grade.one;
-		}
-		else if(grade.equals("two"))
-		{
-			gradesOfRestaurant = Grade.two;
-		}
-		else if(grade.equals("three"))
-		{
-			gradesOfRestaurant = Grade.three;
-		}
-		else if(grade.equals("Four"))
-		{
-			gradesOfRestaurant = Grade.four;
-		}
-		else
-		{
-			gradesOfRestaurant = Grade.five;
-		}
-		
-		
-		try {
-		
-		Comment comment = new Comment(nextId(), user, restaurant, commentText, grade);
-			
-			
-			ApplicationContext.getInstane().getComments();
-			ApplicationContext.getInstane().Save();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ArrayList<Comment> grades = new ArrayList<Comment>();
 	}
 	
+	public String generateID() {
+		int id = 1;
+		
+		for(Comment comment : WebContext.getInstance().getComments()) {
+			int IDToCompare = Integer.parseInt(comment.getCommentID());
+			
+			if(IDToCompare > id) {
+				id = IDToCompare;
+			}
+		}
+		return Integer.toString(id+1);
+	}
+	
+	public ArrayList<Comment> ApprovedComment(String id) {
+		
+		ArrayList<Comment> result = new ArrayList<Comment>();
+		
+		for(Comment comment : WebContext.getInstance().getComments()) {
+			if(comment.getRestaurant().getRestaurantID().equals(id) && comment.getCommentStatus().equals("Approved") ) {
+					result.add(comment);
+			}
+		}	
+		return result;
+	}
+	
+	public ArrayList<Comment> NotApprovedComment(String id) {
+		
+		ArrayList<Comment> result = new ArrayList<Comment>();
+		
+		for(Comment comment : WebContext.getInstance().getComments()) {
+				if(comment.getCommentStatus().equals("Not_approved")) {
+					result.add(comment);
+				}
+			}	
+		return result;
+	}
 
+	public void saveComment(String id, String text, String grade, User user, Restaurant restaurant) {
+		Grade gradee;
+		if(grade.equals("1")) {
+			gradee = Grade.one;
+		}else if(grade.equals("2")) {
+			gradee = Grade.two;
+		}else if(grade.equals("3")){
+			gradee = Grade.three;
+		}else if(grade.equals("4")) {
+			gradee = Grade.four;
+		}else {
+			gradee = Grade.five;
+		}
+			
+		Comment comment = new Comment(id, text, gradee, user, restaurant,CommentStatus.On_review);
+				
+		WebContext.getInstance().getComments().add(comment);
+		WebContext.getInstance().save();
+		return;
+		
+	}
+	
 }
-

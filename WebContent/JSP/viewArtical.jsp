@@ -1,55 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<!DOCTYPE html>
+<%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
-<form action="ViewArticalServlet" method="POST">
-</form>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
 </head>
 <body>
+<form action="/WebShop/ViewArticalServlet" method="POST">
+<table>
 	
-	<form>
-		<table>
-			<tr>
-				<td>Artical name</td>
-				<td><input type="text" name ="articalName"/></td>
-			</tr>
-			<tr>
-				<td>Price</td>
-				<td><input type="password" name ="price"/></td>
-			</tr>
-			<tr>
-				<td>Artical type</td>
-				<td>
-					<select name = "filter">
-					<option>fruit</option>
-					<option>vegetables</option>
-					<option>meat</option>
-					<option>fish</option>
-					<option>pasta</option>
-					<option>sweets</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Quantity</td>
-				<td><input type="text" name ="quantity"/></td>
-			</tr>
-			<tr>
-				<td>Description</td>
-				<td><input type="text" name ="description"/></td>
-			</tr>
-			<tr>
-				<td>Picture</td>
-				<td><input type="text" name ="picture"/></td>
-			</tr>
-			<tr><td><input type= "submit" value= "View atical"></td></tr>
-			</table>
-	</form>
-		<!-- Prikaži grešku, ako je bilo -->
+</table>
+</form>
+		<p>${requestScope.artical.articalName}</p>
+	    <p>${requestScope.artical.quantity}</p>
+	    <p>${requestScope.artical.type}</p>
+	    <p><img src="${requestScope.artical.getArticalImage()}" height="100"/></p>
+	   	<p>${requestScope.artical.description}</p>
+	   	<p>${requestScope.artical.price}</p>	
+	   	
+	   	<c:choose>
+	   		<c:when test="${requestScope.user.role=='Buyer'}">
+		<form action="CreateOrderServlet" method="post">
+			<input type="hidden" name="articalID" value="${artical.articalID}">
+			<input type ="number" name = "quantity">
+			<input type = "submit" value = "Add">
+		</form>	   		
+	   		</c:when>
+	   	</c:choose>
+	    	
+	
+	<!-- Prikaži grešku, ako je bilo -->
 	<% if (request.getAttribute("err") != null) { %>
 		<p style="color: red"><%=request.getAttribute("err")%>></p>
 	<% } %>

@@ -2,8 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,97 +11,86 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.ApplicationContext;
 import beans.Artical;
-import beans.ArticalType;
-import beans.Gender;
 import beans.Location;
 import beans.Restaurant;
 import beans.Role;
+import beans.Type;
 import beans.User;
+import beans.WebContext;
 import dao.ArticalDAO;
-import dao.RestaurantDAO;
+import dao.LocationDAO;
+import dao.RestourantDAO;
 import dao.UserDAO;
 
-public class AddNewArticalServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    
-	public AddNewArticalServlet()
-	{
+public class AddNewArticalServlet extends HttpServlet{
+
+	private static final long serialVersionUID=313l;
+	
+	public AddNewArticalServlet() {
 		super();
-		
 		
 	}
 	
-	public void init() throws ServletException {
-    	super.init();
-    	
-        ServletContext context = getServletContext();
-		String contextPath = context.getRealPath("");
-		
-		ApplicationContext.getInstane().setContextPath(contextPath);
-    }
+	 public void init() throws ServletException {
+	    	super.init();
+	    	ServletContext context = getServletContext();
+	   	String contextPath = context.getRealPath("");
+	   	
+	   	WebContext.getInstance().setContextPath(contextPath);
+	    }
 	
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
-    	String restourantID = (String)request.getParameter("restaurantID");
-    	
-    	RestaurantDAO restaurantDAO = new RestaurantDAO();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Restaurant restaurant = restaurantDAO.findById(restourantID);
+		String idRestaurant = (String)request.getParameter("restaurantID"); 
+		RestourantDAO restourantDAO = new RestourantDAO();
 		
-    	request.setAttribute("restourantID", restourantID);
-    	
-    	RequestDispatcher disp = request.getRequestDispatcher("/JSP/addNewArtical.jsp");
-    	disp.forward(request, response);
-    }
-    
-    @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
-   
-    	User user = (User)request.getSession().getAttribute("user");
-    	
-    	String restaurantId = (String)request.getParameter("restaurantId");
-    	
-    	RestaurantDAO restaurantDAO = new RestaurantDAO();
-    	Restaurant restaurant = restaurantDAO.findById(restaurantId);
-    	
-    	if(user == null)
-    	{
-    		RequestDispatcher disp = request.getRequestDispatcher("/JSP/login.jsp");
-    		disp.forward(request, response);
-    		return;
-    	}
-    	if(!user.getRole().equals(Role.menager))
-    	{
-    		RequestDispatcher rd = request.getRequestDispatcher("/index.html");
-    		rd.forward(request, response);
-    		return;
-    	}
-    	
-      	String articalName = (String)request.getParameter("articalName");
-    	String price = (String)request.getParameter("price");
-		Double articalPrice = Double.parseDouble(price);
+		Restaurant restaurant = restourantDAO.findByID(idRestaurant);
 		
-    	String articalTypeString = (String)request.getParameter("articalType");
-    	ArticalType articalType;
-    	
-		if(articalTypeString.equals("Drink"))
+		
+		request.setAttribute("restaurant",restaurant);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/JSP/addNewArtical.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		User user = (User)request.getSession().getAttribute("user");
+		
+		String restaurantID = (String)request.getParameter("restaurantID");
+		
+		RestourantDAO restourantDAO = new RestourantDAO();
+		Restaurant restaurant = restourantDAO.findByID(restaurantID);
+		
+		if(user == null)
 		{
-			articalType = ArticalType.Drink;
-		}
-		else
+			RequestDispatcher rd = request.getRequestDispatcher("/JSP/login.jsp");
+			rd.forward(request,response);
+			return;
+	    }
+		
+		if(!user.getRole().equals(Role.Manager))
 		{
-			articalType = ArticalType.Food;
+			RequestDispatcher rd = request.getRequestDispatcher("index.html");
+			rd.forward(request,response);
+			return;
+	    }
+		
+		String articalName = (String)request.getParameter("articalname");
+		double price =  Double.parseDouble((String)request.getParameter("price"));
+		String typeString = (String)request.getParameter("type");
+		String articalImage = (String)request.getParameter("articalImage");
+		String description = (String)request.getParameter("description");
+		double quantity = Double.parseDouble((String)request.getParameter("quantity"));
+		
+		Type type = Type.drink;
+		
+		if(typeString.equals("meal")) {
+			type = Type.meal;
 		}
 		
-    	String quantity = (String)request.getParameter("quantity");
-    	String description = (String)request.getParameter("description");
-    	String picture = (String)request.getParameter("picture");
-    	
-    	for(Artical artical: ApplicationContext.getInstane().getArticals()) {
+		for(Artical artical: WebContext.getInstance().getArticals()) {
 			if(artical.getArticalName().equals(articalName)) {
 				request.setAttribute("error", "Already exists artical with that name!");
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/AddNewArticalServlet");
@@ -110,15 +98,14 @@ public class AddNewArticalServlet extends HttpServlet {
 				 return;
 			}
 		}
-			
-    	ArticalDAO articalDAO = new ArticalDAO();
-		articalDAO.addArtical( articalName, price, articalType, quantity, description, picture, restaurant);
+		
+		ArticalDAO articalDAO = new ArticalDAO();
+		
+		articalDAO.addArtical(articalName, price, type, articalImage, description, quantity, restaurant);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/JSP/homePage.jsp");
 		requestDispatcher.forward(request, response);
 		return;
-				 	
-    }
-
+	}
+	
 }
-

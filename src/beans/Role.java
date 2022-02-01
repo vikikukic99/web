@@ -1,10 +1,9 @@
 package beans;
 
 public enum Role {
-
-	administator,
-	menager,
-	deliverGuy,
-	buyer;
+	Administrator,
+	Manager,
+	DeliveryGuy,
+	Buyer;
 	
 }

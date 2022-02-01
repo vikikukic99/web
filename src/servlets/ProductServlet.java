@@ -8,32 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.ApplicationContext;
+import beans.WebContext;
 
 
-/***
- * Servlet zadužen za prikazivanje proizvoda.
- * @author Lazar
- *
- */
+
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public ProductServlet() {
         super();
-		
     }
-    
-    
     
     @Override
     public void init() throws ServletException { 
     	super.init();
     	ServletContext context = getServletContext();
     	String contextPath = context.getRealPath("");
-    	
-		ApplicationContext.getInstane().setContextPath(contextPath);
-
     	// Dodaju se proizvodi u kontekst kako bi mogli servleti da rade sa njima
     	//context.setAttribute("products", new ProductDAO(contextPath));
     }

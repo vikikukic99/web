@@ -1,82 +1,134 @@
 package beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Order {
-	
-	private String idOrder;
+
+	private String orderId;
 	private Date orderDate;
-	private double priceOrder;
+	private Double cost;
 	private OrderStatus orderStatus;
-	private User buyer;
-	private User deliverGuy;
-	private Cart cart;
-	private OrderItem orderItem;
+	private User costumer;
+	private User deliveryGuy;
+	private Restaurant restourant;
 	
-	public String exportToString()
-	{
-		return idOrder + '|' + orderDate.toString() + '|' + priceOrder + '|' + orderStatus.toString() + '|' + buyer.getID() + '|' + deliverGuy.getID() + '|' + cart.toString() + '|' + orderItem.toString(); 
-	}
-	
-	
-	public Order(String idOrder, Date orderDate, double priceOrder, OrderStatus orderStatus, User buyer, User deliveryGuy, Cart cart, OrderItem orderItem) {
+	/*public Order(String orderId, Date orderDate, String cost, OrderStatus orderStatus, User costumer, User deliveryGuy,
+			OrderItem orderItem) {
 		super();
-		this.idOrder = idOrder;
+		this.orderId = orderId;
 		this.orderDate = orderDate;
-		this.priceOrder = priceOrder;
+		this.cost = cost;
 		this.orderStatus = orderStatus;
-		this.buyer = buyer;
-		this.deliverGuy = deliveryGuy;
-		this.cart = cart;
+		this.costumer = costumer;
+		this.deliveryGuy = deliveryGuy;
 		this.orderItem = orderItem;
 	}
-	public User getBuyer() {
-		return buyer;
+	*/
+	
+
+	public Order(String orderId, Date orderDate, Double cost, OrderStatus orderStatus, User costumer, User deliveryGuy, Restaurant restaurant) {
+		super();
+		this.orderId = orderId;
+		this.orderDate = orderDate;
+		this.cost = cost;
+		this.orderStatus = orderStatus;
+		this.costumer = costumer;
+		this.deliveryGuy = deliveryGuy;
+		this.restourant = restaurant;
 	}
-	public User getDeliverGuy() {
-		return deliverGuy;
+	
+	public Order() {
+		super();
+		//this.orderId = orderId;
+		//this.orderDate = orderDate;
+		//this.cost = cost;
+		//this.orderStatus = orderStatus;
+		//this.costumer = costumer;
+		//this.restourant = restourant;
 	}
-	public void setDeliverGuy(User deliverGuy) {
-		this.deliverGuy = deliverGuy;
+
+
+
+	
+
+	public Order(String orderID, Date orderDate2, double price, OrderStatus orderStatus, User buyer,
+			Restaurant restaurant) {
+		this.orderId=orderID;
+		this.orderDate=orderDate2;
+		this.cost=price;
+		this.orderStatus=orderStatus;
+		this.costumer=buyer;
+		this.restourant=restaurant;
 	}
-	public Cart getCart() {
-		return cart;
+
+	public String getOrderId() {
+		return orderId;
 	}
-	public void setCart(Cart cart) {
-		this.cart = cart;
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
-	public OrderItem getOrderItem() {
-		return orderItem;
+
+	public Restaurant getRestourant() {
+		return restourant;
 	}
-	public void setOrderItem(OrderItem orderItem) {
-		this.orderItem = orderItem;
+
+
+
+	public void setRestourant(Restaurant restourant) {
+		this.restourant = restourant;
 	}
-	public void setBuyer(User buyer) {
-		this.buyer = buyer;
-	}
-	public String getIdOrder() {
-		return idOrder;
-	}
-	public void setIdOrder(String idOrder) {
-		this.idOrder = idOrder;
-	}
+
+
+
 	public Date getOrderDate() {
 		return orderDate;
 	}
+
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	public double getPriceOrder() {
-		return priceOrder;
+
+	public Double getCost() {
+		return cost;
 	}
-	public void setPriceOrder(double priceOrder) {
-		this.priceOrder = priceOrder;
+
+	public void setCost(Double cost) {
+		this.cost = cost;
 	}
+
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
+
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
+	public User getCostumer() {
+		return costumer;
+	}
+
+	public void setCostumer(User costumer) {
+		this.costumer = costumer;
+	}
+
+	public User getDeliveryGuy() {
+		return deliveryGuy;
+	}
+
+	public void setDeliveryGuy(User deliveryGuy) {
+		this.deliveryGuy = deliveryGuy;
+	}
+	
+	public String ExportString() 
+	{
+		String convertDate = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateForm = new SimpleDateFormat(convertDate);
+		
+		String date = simpleDateForm.format(orderDate);
+		
+		return orderId + "|" + date + "|" + cost + "|" + orderStatus.toString() + "|" + costumer.getUserID() + "|" + (deliveryGuy == null ? " " : deliveryGuy.getUserID()) + "|" + restourant.getRestaurantID();
+	}
 }

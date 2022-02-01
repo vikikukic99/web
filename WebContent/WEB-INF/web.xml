@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://JAVA.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>WebShop</display-name>
   <welcome-file-list>
   	<!-- Ako putanja nije navedena, podrazumevano se otvara login stranica -->
-  	<welcome-file>LoginServlet</welcome-file>
+  	<welcome-file>homePage.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
@@ -14,14 +14,6 @@
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>ProductServlet</servlet-name>
-    <servlet-class>servlets.ProductServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ProductServlet</servlet-name>
-    <url-pattern>/ProductServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>servlets.LogoutServlet</servlet-class>
   </servlet>
@@ -29,48 +21,183 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>RegistationServlet</servlet-name>
-    <servlet-class>servlets.RegistationServlet</servlet-class>
+   <servlet>
+    <servlet-name>AddNewRestaurantServlet</servlet-name>
+    <servlet-class>servlets.AddNewRestaurantServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RegistationServlet</servlet-name>
-    <url-pattern>/RegistationServlet</url-pattern>
+    <servlet-name>AddNewRestaurantServlet</servlet-name>
+    <url-pattern>/AddNewRestaurantServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AddMenagerServlet</servlet-name>
-    <servlet-class>servlets.AddMenagerServlet</servlet-class>
+   <servlet>
+    <servlet-name>AdministratorOverviewUsersServlet</servlet-name>
+    <servlet-class>servlets.AdministratorOverviewUsersServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddMenagerServlet</servlet-name>
-    <url-pattern>/AddMenagerServlet</url-pattern>
+    <servlet-name>AdministratorOverviewUsersServlet</servlet-name>
+    <url-pattern>/AdministratorOverviewUsersServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AddRestaurantServlet</servlet-name>
-    <servlet-class>servlets.AddRestaurantServlet</servlet-class>
+    <servlet>
+    <servlet-name>AllRestaurantsServlet</servlet-name>
+    <servlet-class>servlets.AllRestaurantsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddRestaurantServlet</servlet-name>
-    <url-pattern>/AddRestaurantServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>ViewRestaurantsServlet</servlet-name>
-    <servlet-class>servlets.ViewRestaurantsServlet</servlet-class>
+    <servlet-name>AllRestaurantsServlet</servlet-name>
+    <url-pattern>/AllRestaurantsServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>ChangeArticalServlet</servlet-name>
+    <servlet-class>servlets.ChangeArticalServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ViewRestaurantsServlet</servlet-name>
-    <url-pattern>/ViewRestaurantsServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>ViewRestaurantServlet</servlet-name>
-    <servlet-class>servlets.ViewRestaurantServlet</servlet-class>
+    <servlet-name>ChangeArticalServlet</servlet-name>
+    <url-pattern>/ChangeArticalServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>RegServlet</servlet-name>
+    <servlet-class>servlets.RegServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ViewRestaurantServlet</servlet-name>
-    <url-pattern>/ViewRestaurantServlet</url-pattern>
+    <servlet-name>RegServlet</servlet-name>
+    <url-pattern>/RegServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>RestaurantViewServlet</servlet-name>
+    <servlet-class>servlets.RestaurantViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RestaurantViewServlet</servlet-name>
+    <url-pattern>/RestaurantViewServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>ShowBuyersOrderServlet</servlet-name>
+    <servlet-class>servlets.ShowBuyersOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowBuyersOrderServlet</servlet-name>
+    <url-pattern>/ShowBuyersOrderServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>ShowOrderToDeliveryGuyServlet</servlet-name>
+    <servlet-class>servlets.ShowOrderToDeliveryGuyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowOrderToDeliveryGuyServlet</servlet-name>
+    <url-pattern>/ShowOrderToDeliveryGuyServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>ShowOrderToManagerServlet</servlet-name>
+    <servlet-class>servlets.ShowOrderToManagerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowOrderToManagerServlet</servlet-name>
+    <url-pattern>/ShowOrderToManagerServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>ShowAllDeliverdOrdersFromRestaurantServlet</servlet-name>
+    <servlet-class>servlets.ShowAllDeliverdOrdersFromRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowAllDeliverdOrdersFromRestaurantServlet</servlet-name>
+    <url-pattern>/ShowAllDeliverdOrdersFromRestaurantServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet>
+    <servlet-name>CommentServlet</servlet-name>
+    <servlet-class>servlets.CommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentServlet</servlet-name>
+    <url-pattern>/CommentServlet</url-pattern>
   </servlet-mapping>
-  
+   <servlet>
+    <servlet-name>ShowChartServlet</servlet-name>
+    <servlet-class>servlets.ShowChartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowChartServlet</servlet-name>
+    <url-pattern>/ShowChartServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>CommentStatusServlet</servlet-name>
+    <servlet-class>servlets.CommentStatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentStatusServlet</servlet-name>
+    <url-pattern>/CommentStatusServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>rateRestaurantServlet</servlet-name>
+    <servlet-class>servlets.rateRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>rateRestaurantServlet</servlet-name>
+    <url-pattern>/rateRestaurantServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>AddNewUserServlet</servlet-name>
+    <servlet-class>servlets.AddNewUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNewUserServlet</servlet-name>
+    <url-pattern>/AddNewUserServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>AddNewArticalServlet</servlet-name>
+    <servlet-class>servlets.AddNewArticalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddNewArticalServlet</servlet-name>
+    <url-pattern>/AddNewArticalServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>ChangeArticalQuantityServlet</servlet-name>
+    <servlet-class>servlets.ChangeArticalQuantityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeArticalQuantityServlet</servlet-name>
+    <url-pattern>/ChangeArticalQuantityServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
+    <servlet-name>ChartServlet</servlet-name>
+    <servlet-class>servlets.ChartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChartServlet</servlet-name>
+    <url-pattern>/ChartServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>DeleteArticalInChartServlet</servlet-name>
+    <servlet-class>servlets.DeleteArticalInChartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteArticalInChartServlet</servlet-name>
+    <url-pattern>/DeleteArticalInChartServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>ShowMyRestaurantServlet</servlet-name>
+    <servlet-class>servlets.ShowMyRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowMyRestaurantServlet</servlet-name>
+    <url-pattern>/ShowMyRestaurantServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SeeYourProfileServlet</servlet-name>
+    <servlet-class>servlets.SeeYourProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SeeYourProfileServlet</servlet-name>
+    <url-pattern>/SeeYourProfileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CreateOrderServlet</servlet-name>
+    <servlet-class>servlets.CreateOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateOrderServlet</servlet-name>
+    <url-pattern>/CreateOrderServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
     <servlet-name>ViewArticalServlet</servlet-name>
     <servlet-class>servlets.ViewArticalServlet</servlet-class>
   </servlet>
@@ -78,20 +205,132 @@
     <servlet-name>ViewArticalServlet</servlet-name>
     <url-pattern>/ViewArticalServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>AddCommentServlet</servlet-name>
-    <servlet-class>servlets.AddCommentServlet</servlet-class>
+     <servlet>
+    <servlet-name>OrderingServlet</servlet-name>
+    <servlet-class>servlets.OrderingServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddCommentServlet</servlet-name>
-    <url-pattern>/AddCommentServlet</url-pattern>
+    <servlet-name>OrderingServlet</servlet-name>
+    <url-pattern>/OrderingServlet</url-pattern>
+  </servlet-mapping>
+     <servlet>
+    <servlet-name>ViewOrdersServlet</servlet-name>
+    <servlet-class>servlets.ViewOrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewOrdersServlet</servlet-name>
+    <url-pattern>/ViewOrdersServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>OrderHasBeenDeliveredServlet</servlet-name>
+    <servlet-class>servlets.OrderHasBeenDeliveredServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderHasBeenDeliveredServlet</servlet-name>
+    <url-pattern>/OrderHasBeenDeliveredServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AddNewArticalServlet</servlet-name>
-    <servlet-class>servlets.AddNewArticalServlet</servlet-class>
+    <servlet-name>CommentNotApprovedServlet</servlet-name>
+    <servlet-class>servlets.CommentNotApprovedServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddNewArticalServlet</servlet-name>
-    <url-pattern>/AddNewArticalServlet</url-pattern>
+    <servlet-name>CommentNotApprovedServlet</servlet-name>
+    <url-pattern>/CommentNotApprovedServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CommentIsApprovedServlet</servlet-name>
+    <servlet-class>servlets.CommentIsApprovedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentIsApprovedServlet</servlet-name>
+    <url-pattern>/CommentIsApprovedServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ShowApprovedCommentsServlet</servlet-name>
+    <servlet-class>servlets.ShowApprovedCommentsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowApprovedCommentsServlet</servlet-name>
+    <url-pattern>/ShowApprovedCommentsServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>CancelOrderServlet</servlet-name>
+    <servlet-class>servlets.CancelOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelOrderServlet</servlet-name>
+    <url-pattern>/CancelOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OverviewOrdersServlet</servlet-name>
+    <servlet-class>servlets.OverviewOrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OverviewOrdersServlet</servlet-name>
+    <url-pattern>/OverviewOrdersServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ChangeDeliveryStatusServlet</servlet-name>
+    <servlet-class>servlets.ChangeDeliveryStatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeDeliveryStatusServlet</servlet-name>
+    <url-pattern>/ChangeDeliveryStatusServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>TransportToDeliverdStatusServlet</servlet-name>
+    <servlet-class>servlets.TransportToDeliverdStatusServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TransportToDeliverdStatusServlet</servlet-name>
+    <url-pattern>/TransportToDeliverdStatusServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>TakeOrderServlet</servlet-name>
+    <servlet-class>servlets.TakeOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TakeOrderServlet</servlet-name>
+    <url-pattern>/TakeOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NotAcceptRequestServlet</servlet-name>
+    <servlet-class>servlets.NotAcceptRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotAcceptRequestServlet</servlet-name>
+    <url-pattern>/NotAcceptRequestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AcceptRequestServlet</servlet-name>
+    <servlet-class>servlets.AcceptRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AcceptRequestServlet</servlet-name>
+    <url-pattern>/AcceptRequestServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>ProcessingToInPreparationStatusServlet </servlet-name>
+    <servlet-class>servlets.ProcessingToInPreparationStatusServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcessingToInPreparationStatusServlet </servlet-name>
+    <url-pattern>/ProcessingToInPreparationStatusServlet </url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>ShowArticalForOrderServlet </servlet-name>
+    <servlet-class>servlets.ShowArticalForOrderServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowArticalForOrderServlet </servlet-name>
+    <url-pattern>/ShowArticalForOrderServlet </url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>DeleteUserServlet </servlet-name>
+    <servlet-class>servlets.DeleteUserServlet </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUserServlet </servlet-name>
+    <url-pattern>/DeleteUserServlet </url-pattern>
   </servlet-mapping>
 </web-app>

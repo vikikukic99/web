@@ -1,0 +1,4 @@
+2|odlican|five|3|2|On_review
+3|odlican|five|3|2|Approved
+4|hrana odlicna|four|3|2|On_review
+5|dobra usluga|three|3|2|On_review

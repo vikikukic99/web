@@ -1,51 +1,28 @@
 package beans;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
 
-	private String iD;
+	private String userID;
 	private String username;
 	private String password;
-	private String name;
-	private String surname;
+	private String firstName;
+	private String lastName;
 	private Gender gender;
-	private Date birthDate;
+	private Date dateOfBirth;
 	private Role role;
-	private String nummberOfPoints;
-	private TypeOfBuyer typeOfBuyer;
+	private String pointsCollected;
+	private TypeOfCostumer typeOfCostumer;
+	private Restaurant restaurant;
+	private ArrayList<Order> ordersForDeliveryMan;
+	private ArrayList<Order> ordersForCostumer;
+	private Cart cart;
+	private Boolean isDelete;
 	
-	public String exportToString()
-	{
-		String pattern = "yyyy/MM/dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		
-		
-		return iD + ';' + username + ';' + password + ';' + name + ';' + surname + ";" + gender.toString() + ';' + simpleDateFormat.format(birthDate) + ';' + role.toString() + ';' + nummberOfPoints + ';' + (typeOfBuyer == null ? "" : typeOfBuyer.toString()); 
-	}
 	
-	public User(String iD, String username, String password, String name, String surname, Gender gender, Date birthDate,
-			Role role, String nummberOfPoints, TypeOfBuyer typeOfBuyer) {
-		super();
-		this.iD = iD;
-		this.username = username;
-		this.password = password;
-		this.name = name;
-		this.surname = surname;
-		this.gender = gender;
-		this.birthDate = birthDate;
-		this.role = role;
-		this.nummberOfPoints = nummberOfPoints;
-		this.typeOfBuyer = typeOfBuyer;
-	}
-	
-	public String getID() {
-		return iD;
-	}
-	public void setID(String iD) {
-		this.iD = iD;
-	}
 	public String getUsername() {
 		return username;
 	}
@@ -58,17 +35,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getSurname() {
-		return surname;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public Gender getGender() {
 		return gender;
@@ -76,11 +53,11 @@ public class User {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-	public Date getBirthDate() {
-		return birthDate;
+	public Date getDateOfBirth() {
+		return dateOfBirth;
 	}
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 	public Role getRole() {
 		return role;
@@ -88,19 +65,65 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	public String getNummberOfPoints() {
-		return nummberOfPoints;
+	public String getPointsCollected() {
+		return pointsCollected;
 	}
-	public void setNummberOfPoints(String nummberOfPoints) {
-		this.nummberOfPoints = nummberOfPoints;
-	}
-
-	public TypeOfBuyer getTypeOfBuyer() {
-		return typeOfBuyer;
-	}
-
-	public void setTypeOfBuyer(TypeOfBuyer typeOfBuyer) {
-		this.typeOfBuyer = typeOfBuyer;
+	public void setPointsCollected(String pointsCollected) {
+		this.pointsCollected = pointsCollected;
 	}
 	
+	
+	
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public TypeOfCostumer getTypeOfCostumer() {
+		return typeOfCostumer;
+	}
+	public void setTypeOfCostumer(TypeOfCostumer typeOfCostumer) {
+		this.typeOfCostumer = typeOfCostumer;
+	}
+	public User(String userID, String username, String password, String firstName, String lastName, Gender gender,
+			Date dateOfBirth, Role role, String pointsCollected, TypeOfCostumer typeOfCostumer) {
+		super();
+		this.userID = userID;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.dateOfBirth = dateOfBirth;
+		this.role = role;
+		this.pointsCollected = pointsCollected;
+		this.typeOfCostumer = typeOfCostumer;
+	}
+	
+	public User() {
+		super();
+	}
+	
+	public String ExportString() 
+	{
+		String costumerTypeString = "";
+		if(typeOfCostumer!=null) {
+			costumerTypeString = typeOfCostumer.getNameType().toString();
+		}
+		
+		String convertDate = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateForm = new SimpleDateFormat(convertDate);
+		
+		String date = simpleDateForm.format(dateOfBirth);
+		
+		
+		return userID + "|" + username + "|" + password + "|" + firstName + "|" + lastName + "|" + gender.toString() + "|" + date + "|" + role.toString() + "|" + pointsCollected + "|" + costumerTypeString;
+	}
 }

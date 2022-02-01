@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<style type="text/css">
+	body 
+	input[type=submit] {
+		  border: red;
+		  margin: 4px 2px;
+		  cursor: pointer;
+	}
+	div {
+		text-align: lefrt;
+  		padding: 30px;
+	}
+	
+	h1 {
+		text-align: left; 
+		font-family: sans-serif;
+		font-style: inherit;
+	}
+</style>
+</head>
+<body>
+	<h1>Are you hungry?</h1>
+	<div>
+    <form method="get" action="AllRestaurantsServlet">
+    <button type="submit">All restaurant</button>
+	</form><br><br>
+    <form method="get" action="RegServlet">
+    <button type="submit">Registration</button>
+	</form><br><br>
+	<form method="get" action="LoginServlet">
+    <button type="submit">Login</button>
+	</form><br><br>
+	</div>
+</body>
+</html>

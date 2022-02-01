@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Order;
 import beans.OrderStatus;
-import beans.ApplicationContext;
+import beans.WebContext;
 import dao.OrderDAO;
 
 
@@ -44,7 +44,7 @@ public class AcceptRequestServlet extends HttpServlet {
 		Order order = orderDAO.findById(orderId);
 		
 		order.setOrderStatus(OrderStatus.Transport);
-		ApplicationContext.getInstane().Save();
+		WebContext.getInstance().save();
 		
 		RequestDispatcher disp = request.getRequestDispatcher("/JSP/homePage.jsp");
 		disp.forward(request, response);

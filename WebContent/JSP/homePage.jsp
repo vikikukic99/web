@@ -8,29 +8,44 @@
 	<title>WebShop</title>
 </head>
 <body>
-	<form method="get" action="/WebShop/LoginServlet">
-    <button type="submit">Login</button>
+	<form method="get" action="AdministratorOverviewUsersServlet">
+	<button type="submit" ${ user.getRole().toString()!="Administrator"  ? 'hidden="hidden"' : ''}>See all users</button>
 	</form><br><br>
-	<form method="get" action="/WebShop/AddArticleServlet">
+	<form method="get" action="AddNewUserServlet">
+	<button type="submit" ${ user.getRole().toString()!="Administrator"  ? 'hidden="hidden"' : ''}>Add manager or delivery guy</button>
+	</form><br><br>
+	<form method="get" action="AddNewRestaurantServlet">
+	<button type="submit" ${ user.getRole().toString()!="Administrator"  ? 'hidden="hidden"' : ''}>Add restaurant</button>
+	</form><br><br>
+	<form method="get" action="AllRestaurantsServlet">
+	<button type="submit">All restaurants</button>
+	</form><br><br>
+	<form method="get" action="SeeYourProfileServlet">
+	<button type="submit">See your profile</button>
+	</form><br><br>
+	<form method="get" action="AddNewArticalServlet">
 	<button type="submit" ${ user.getRole().toString()!="Manager"  ? 'hidden="hidden"' : ''}>Add article</button>
 	</form><br><br>
-	<form method="get" action="/WebShop/ViewArticalServlet">
-	<button type="submit" ${ user.getRole().toString()!="Manager"  ? 'hidden="hidden"' : ''}>Edit article</button>
+	<form method="get" action="ShowMyRestaurantServlet">
+	<button type="submit" ${ user.getRole().toString()!="Manager"  ? 'hidden="hidden"' : ''}>Show my restaurant</button>
 	</form><br><br>
-		<form method="get" action="/WebShop/EditProfileServlet">
-    <button type="submit">Edit profile</button>
+	<form method="get" action="ShowOrderToManagerServlet">
+	<button type="submit" ${ user.getRole().toString()!="Manager"  ? 'hidden="hidden"' : ''}>Show orders</button>
 	</form><br><br>
-		<form method="get" action="/WebShop/ViewRestaurantsServlet">
-    <button type="submit">View all restaurants</button>
+	<form method="get" action="ShowOrderToManagerServlet">
+	<button type="submit" ${ user.getRole().toString()!="DeliveryGuy"  ? 'hidden="hidden"' : ''}>Show orders</button>
 	</form><br><br>
-		<form method="get" action="/WebShop/RegistrationServlet">
-    <button type="submit">Registration</button>
+	<form method="get" action="CommentStatusServlet">
+	<button type="submit" ${ user.getRole().toString()!="Manager"  ? 'hidden="hidden"' : ''}>See all comments</button>
 	</form><br><br>
-	<form method="get" action="/WebShop/AddNewArticalServlet">
-	<button type="submit" ${ user.getRole().toString()!="Manager"  ? 'hidden="hidden"' : ''}>Add new artical</button>
+	<form method="get" action="CommentStatusServlet">
+	<button type="submit" ${ user.getRole().toString()!="Administrator"  ? 'hidden="hidden"' : ''}>See all comments</button>
 	</form><br><br>
-	<form method="get" action="/WebShop/AddMenagerServlet">
-	<button type="submit" ${ user.getRole().toString()!="Administrator"  ? 'hidden="hidden"' : ''}>Add new menager</button>
+	<form method="get" action="ShowBuyersOrderServlet">
+	<button type="submit" ${ user.getRole().toString()!="Buyer"  ? 'hidden="hidden"' : ''}>See all orders</button>
+	</form><br><br>
+	<form method="get" action="ShowApprovedCommentsServlet">
+	<button type="submit" ${ user.getRole().toString()!="Buyer"  ? 'hidden="hidden"' : ''}>Show approved comments</button>
 	</form><br><br>
 </body>
 </html>

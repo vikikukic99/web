@@ -1,66 +1,35 @@
 package beans;
 
-public class Restaurant {
-
-	private String id;
-	private String restaurantName;
+public class Restaurant 
+{
+	private String restaurantID;
+	private String name;
 	private String restaurantType;
-	private Status status;
-	private String logoOfRestaurant;
-	private User menager;
+	private Status restaurantStatus;
+	private User manager;
 	private Location location;
+	private String restaurantLogo;
+	private Double averageGrade;
 	
-	public String exportToString()
-	{
-		return id + '|' + restaurantName + '|' + restaurantType + '|' + status.toString() + logoOfRestaurant + menager.getID() + location.toString() ; 
-	}
-	
-	
-	public Restaurant(String id, String restaurantName, String restaurantType, Status status, String logoOfRestaurant, Location location, User menager) {
+	public Restaurant(String restaurantID, String name, String restaurantType, Status restaurantStatus, User manager, Location location, String restaurantLogo, Double averageGrade) {
 		super();
-		this.id = id;
-		this.restaurantName = restaurantName;
+		this.restaurantID = restaurantID;
+		this.name = name;
 		this.restaurantType = restaurantType;
-		this.status = status;
-		this.logoOfRestaurant = logoOfRestaurant;
-		this.menager = menager;
+		this.restaurantStatus = restaurantStatus;
+		this.manager = manager;
 		this.location = location;
+		this.restaurantLogo = restaurantLogo;
+		this.averageGrade = averageGrade;
 	}
-	public String getId() {
-		return id;
+	
+	public Restaurant() {}
+	
+	public String getRestaurantID() {
+		return restaurantID;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getRestaurantName() {
-		return restaurantName;
-	}
-	public void setRestaurantName(String restaurantName) {
-		this.restaurantName = restaurantName;
-	}
-	public String getRestaurantType() {
-		return restaurantType;
-	}
-	public void setRestaurantType(String restaurantType) {
-		this.restaurantType = restaurantType;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	public String getLogoOfRestaurant() {
-		return logoOfRestaurant;
-	}
-	public void setLogoOfRestaurant(String logoOfRestaurant) {
-		this.logoOfRestaurant = logoOfRestaurant;
-	}
-	public User getMenager() {
-		return menager;
-	}
-	public void setMenager(User menager) {
-		this.menager = menager;
+	public void setRestaurantID(String restaurantID) {
+		this.restaurantID = restaurantID;
 	}
 	public Location getLocation() {
 		return location;
@@ -68,8 +37,49 @@ public class Restaurant {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+	public User getManager() {
+		return manager;
+	}
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
+	public String getName() {
+		return name;
+	}
 	
+	public Double getAverageGrade() {
+		return averageGrade;
+	}
+
+	public void setAverageGrade(Double averageGrade) {
+		this.averageGrade = averageGrade;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getRestaurantType() {
+		return restaurantType;
+	}
+	public void setRestaurantType(String restaurantType) {
+		this.restaurantType = restaurantType;
+	}
+	public Status getRestaurantStatus() {
+		return restaurantStatus;
+	}
+	public void setRestaurantStatus(Status restaurantStatus) {
+		this.restaurantStatus = restaurantStatus;
+	}
+	public String getRestaurantLogo() {
+		return restaurantLogo;
+	}
+	public void setRestaurantLogo(String restaurantLogo) {
+		this.restaurantLogo = restaurantLogo;
+	}
 	
-	
-	
+
+	public String ExportString() 
+	{
+		return restaurantID + "|" + name + "|" + restaurantType + "|" + restaurantStatus.toString() + "|" + manager.getUserID() + "|" + location.getLocationID() + "|" + restaurantLogo + "|" + averageGrade.toString();
+	}
 }

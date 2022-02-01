@@ -1,20 +1,32 @@
 package dao;
 
-import beans.ApplicationContext;
 import beans.Cart;
+import beans.User;
+import beans.WebContext;
 
 public class CartDAO {
 
-	public Cart findById(String id)
-	{
-		for(Cart c: ApplicationContext.getInstane().getCarts())
-		{
-			if(c.getiD().equals(id))
-			{
-				return c;
+	public Cart findByID(String id) {
+			for(Cart cart : WebContext.getInstance().getCarts()) {
+				if(cart.getCartID().equals(id)) {
+				return cart;
+		}		
+	}
+	return null;
+	
+}
+	
+	public String generateID() {
+		int id = 1;
+		
+		for(Cart cart : WebContext.getInstance().getCarts()) {
+			int IDToCompare = Integer.parseInt(cart.getCartID());
+			
+			if(IDToCompare > id) {
+				id = IDToCompare;
 			}
 		}
-		return null;
+		return Integer.toString(id+1);
 	}
 	
 }

@@ -7,18 +7,18 @@
 <table>
 	<tr>
 		<td>Username</td>
-		<td><input type="text" name ="username"/></td>
+		<td><input type="text" name="username"/></td>
 	</tr>
 	<tr>
 		<td>Password</td>
-		<td><input type="password" name ="password"/></td>
+		<td><input type="password" name="password"/></td>
 	</tr>
 	<tr><td><input type="submit" value="Login"></td></tr>
 </table>
 </form>
 	<!-- Prikaži grešku, ako je bilo -->
-	<% if (request.getAttribute("err") != null) { %>
-		<p style="color: red"><%=request.getAttribute("err")%>></p>
+	<% if (request.getAttribute("error") != null) { %>
+		<p style="color: red"><%=request.getAttribute("error")%></p>
 	<% } %>
 </body>
 </html>

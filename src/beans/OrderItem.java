@@ -2,27 +2,23 @@ package beans;
 
 public class OrderItem {
 
-	private String id;
+	private String orderItemID;
 	private Artical artical;
 	private Restaurant restaurant;
+	private Order order;
 	
-	
-	public String exportToString()
-	{
-		return id + '|' + artical.toString() + '|' + restaurant.toString();
+
+	public OrderItem(String generateId, Restaurant restaurant2, Artical artical2, Order order) {
+		this.orderItemID=generateId;
+		this.restaurant=restaurant2;
+		this.artical= artical2;
+		this.order=order;
 	}
-	
-	public OrderItem(String id, Artical artical, Restaurant restaurant) {
-		super();
-		this.id = id;
-		this.artical = artical;
-		this.restaurant = restaurant;
+	public String getOrderItemID() {
+		return orderItemID;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+	public void setOrderItemID(String orderItemID) {
+		this.orderItemID = orderItemID;
 	}
 	public Artical getArtical() {
 		return artical;
@@ -35,6 +31,17 @@ public class OrderItem {
 	}
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
+	}
+	
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	public String ExportString() 
+	{
+		return orderItemID + "|" + artical.getArticalID() + "|" + restaurant.getRestaurantID() + "|" + order.getOrderId() ;
 	}
 	
 }

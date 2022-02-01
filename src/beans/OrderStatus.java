@@ -1,12 +1,12 @@
 package beans;
 
 public enum OrderStatus {
-
+	
 	Processing,
 	InPreparation,
-	WaitingForSupplies,
+	PendingDelivery,
+	ManagerRequest,
 	Transport,
-	Delivered,
+	Deliverd,
 	Canceled;
-	
 }

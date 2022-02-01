@@ -1,0 +1,4 @@
+4|burger|600.0|meal|2|4567.0|juneci burger|https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfPHnSzwK4Hlo5taS9JO36XX03MRdcNEu0yw&usqp=CAU
+5|Burek ispod saca|200.0|meal|2|1.0|burek sa mesom|https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwMfxa96M-NGDp_3bkf-qd6cahOf4D90b3nA&usqp=CAU
+2|pasta|300.0|meal|2|90.0|bologneze|https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTF7PZTmNhAxyKYZTn6kKWbV7VCE9Y5KK9IQ&usqp=CAU
+3|pizza|600.0|meal|2|1.0|capricosa|https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8v8SevKDg3hmxZTsMD_Al3s3FW0OSI2XY_g&usqp=CAU

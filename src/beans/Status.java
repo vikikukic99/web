@@ -1,8 +1,7 @@
 package beans;
 
-public enum Status {
-
-	Open,
-	Close;
-	
+public enum Status
+{
+	working,
+	not_working;
 }

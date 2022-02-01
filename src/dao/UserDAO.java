@@ -5,104 +5,218 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import beans.ApplicationContext;
 import beans.Gender;
+import beans.NameType;
+import beans.Restaurant;
 import beans.Role;
-import beans.TypeOfBuyer;
+import beans.TypeOfCostumer;
 import beans.User;
+import beans.WebContext;
 
 public class UserDAO {
 	
-	public ArrayList<User> getMenagers() {
+	public ArrayList<User> getFreeManagers() {
 		
-		ArrayList<User> users = new ArrayList<User>();
+		ArrayList<User> managers = new ArrayList<User>();
 		
-		for(User user: ApplicationContext.getInstane().getUsers()) 
-		{
-			if(user.getRole().equals(Role.menager)) {
-				users.add(user);
+		for(User user: getUsersByRole(Role.Manager)) {
+			if(isManagerFree(user)) {
+				managers.add(user);
 			}
 		}
 		
-		return users;
+		return managers;
 	}
 	
-	public String nextId() {
+	public ArrayList<User> getUsersByRole(Role role) {
 		
-		int id = 0;
+		ArrayList<User> result = new ArrayList<User>();
 		
-		for(User user: ApplicationContext.getInstane().getUsers()) {
-			
-			int idToCompare = Integer.parseInt(user.getID());
-			
-			if(idToCompare > id) {
-				id = idToCompare;
+		for(User user: WebContext.getInstance().getUsers()) {
+			if(user.getRole().equals(role)) {
+				result.add(user);
 			}
-			
 		}
 		
-		return Integer.toString(id + 1);
+		
+		return result;
 	}
-
-	public User findById(String id)
+	
+	public ArrayList<User> getAllUsers() {
+		
+		return WebContext.getInstance().getUsers();
+		
+	}
+	
+	public boolean isManagerFree(User user) {
+		
+		
+		for(Restaurant restaurant: WebContext.getInstance().getRestaurants()) {
+			
+			if(restaurant.getManager() != null && restaurant.getManager().getUserID().equals(user.getUserID())) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public User findByID(String id)
 	{
-		for(User u: ApplicationContext.getInstane().getUsers())
+		for(User u: WebContext.getInstance().getUsers())
 		{
-			if(u.getID().equals(id))
+			if(u.getUserID().equals(id))
 			{
 				return u;
 			}
 		}
 		return null;
 	}
-
-	public User getByUsernameAndPassword(String username, String password)
-	{
-		for(User user: ApplicationContext.getInstane().getUsers())
-		{
-			if(user.getUsername().equals(username) && user.getPassword().equals(password))
-			{
+	
+	public User getByUsernameAndPassword(String username, String password) {
+		
+		for(User user: WebContext.getInstance().getUsers()) {
+			
+			if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
 				return user;
 			}
-		}
-		
+		}	
 		return null;
 	}
 	
-	public void saveUser (String username, String password, String name, String surname, String gender, String dateOfBirth, Role role, String nummberOfPoints, String typeOfBuyerID )
+	public String generateID() {
+		int id = 1;
+		
+		for(User user : WebContext.getInstance().getUsers()) {
+			int IDToCompare = Integer.parseInt(user.getUserID());
+			
+			if(IDToCompare > id) {
+				id = IDToCompare;
+			}
+		}
+		return Integer.toString(id+1);
+	}
+	
+	public void addNewUser(String username, String password, String fristName, String lastName, String gender, String date) throws ParseException {
+		Gender usersGender;
+		if(gender.equals("Male")) {
+			usersGender=Gender.Male;
+		}else {
+			usersGender=Gender.Female;
+		}
+		
+		String datePattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+		
+		Date dateOfBirth = simpleDateFormat.parse(date);	
+		Role role = Role.Buyer;
+		String ID = generateID();
+		
+		TypeOfCostumerDAO typeOfCostumerDAO = new TypeOfCostumerDAO();
+		
+		
+		TypeOfCostumer typeOfCostumer = new TypeOfCostumer();
+		typeOfCostumer.setNameType(NameType.Bronze);
+		typeOfCostumer.setRequestedPoints("0");
+		typeOfCostumer.setDiscount(0.0);
+		typeOfCostumer.setTypeOfCostumerID(typeOfCostumerDAO.generateID());
+		
+		User user = new User(ID, username,password,fristName,lastName,usersGender,dateOfBirth,role,"0",typeOfCostumer);
+		WebContext.getInstance().getUsers().add(user);
+		WebContext.getInstance().save();
+	}
+	
+	public void addNewManagerOrDeliveryGuy(String username, String password, String fristName, String lastName, String gender, String date, String roleString) throws ParseException
 	{
-		Gender userGender;
-		if(gender.equals("Male"))
-		{
-			userGender = Gender.Male;
-		}
-		else
-		{
-			userGender = Gender.Female;
+		String pointsCollected = "0";
+		TypeOfCostumerDAO typeOfCostumerDAO = new TypeOfCostumerDAO();
+		TypeOfCostumer typeOfCostumer = new TypeOfCostumer();
+		typeOfCostumer.setNameType(NameType.Bronze);
+		typeOfCostumer.setRequestedPoints("0");
+		typeOfCostumer.setDiscount(0.0);
+		typeOfCostumer.setTypeOfCostumerID(typeOfCostumerDAO.generateID());
+		String ID = generateID();
+
+		String datePattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+		
+		Date dateOfBirth = simpleDateFormat.parse(date);	
+	
+		Role role = Role.Manager;
+		
+		if(roleString.equals("DeliveryGuy")) {
+			role = Role.DeliveryGuy;
 		}
 		
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		Date date;
-		try {
-			date = simpleDateFormat.parse(dateOfBirth);
-			TypeOfBuyerDAO typeOfBuyerDAO = new TypeOfBuyerDAO();
-			TypeOfBuyer typeOfBuyer = typeOfBuyerDAO.findById(typeOfBuyerID);
-			
-			User user = new User(nextId(), username, password, name, surname, userGender, date,
-					 role, nummberOfPoints, typeOfBuyer);
-			
-			
-			ApplicationContext.getInstane().getUsers().add(user);
-			ApplicationContext.getInstane().Save();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Gender usersGender;
+		if(gender.equals("Male")) {
+			usersGender=Gender.Male;
+		}else {
+			usersGender=Gender.Female;
 		}
 		
 		
+		User user = new User(ID, username,password,fristName,lastName,usersGender,dateOfBirth,role,pointsCollected,typeOfCostumer);
+		
+		WebContext.getInstance().getUsers().add(user);
+		
+		WebContext.getInstance().save();
 		
 	}
-
 	
+	public ArrayList<User> searchAllUsers(String search,String role,String typeOfBuyer) {
+		ArrayList<User> result = new ArrayList<User>();
+		
+		String searchString = search == null ? "" : search.toLowerCase();
+		String roleString = role == null ? "" : role.toLowerCase();
+		String typeOfBuyerString = typeOfBuyer == null ? "" : typeOfBuyer.toLowerCase();
+		
+	
+		
+		for(User user : WebContext.getInstance().getUsers()) {
+			
+
+			if(!(user.getFirstName().toLowerCase().contains(searchString)
+					|| user.getLastName().toLowerCase().contains(searchString)
+					|| user.getUsername().toLowerCase().contains(searchString))) {
+				continue;
+			}
+			
+			
+			if((!role.equals("") &&
+					!user.getRole().toString().toLowerCase().equals(roleString))) {
+				continue;
+			}
+			
+			if((!typeOfBuyer.equals("") &&
+					!user.getTypeOfCostumer().getNameType().toString().toLowerCase().equals(typeOfBuyerString))) {
+				continue;
+			}
+			
+			
+			result.add(user);
+		}
+		return result;
+	}
+
+	public ArrayList<User> sortByFirstName(ArrayList<User> users) {
+		users.sort((o1,o2) -> o1.getFirstName().compareTo(o2.getFirstName()));
+		return users;
+	}
+
+	public ArrayList<User> sortByLastName(ArrayList<User> users) {
+		users.sort((o1,o2) -> o1.getLastName().compareTo(o2.getLastName()));
+		return users;
+	}
+	
+	public ArrayList<User> sortByUserName(ArrayList<User> users) {
+		users.sort((o1,o2) -> o1.getUsername().compareTo(o2.getUsername()));
+		return users;
+	}
+	
+	public ArrayList<User> sortByPointsCollected(ArrayList<User> users) {
+		users.sort((o1,o2) -> o1.getPointsCollected().compareTo(o2.getPointsCollected()));
+		return users;
+	}
 }
+

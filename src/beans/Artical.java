@@ -1,40 +1,16 @@
 package beans;
 
-public class Artical {
-	
-	private String iD;
+public class Artical
+{
+	private String articalID;
 	private String articalName;
 	private double price;
-	private ArticalType articalType;
-	private String quantity;
-	private String description;
-	private String picture;
+	private Type type;
 	private Restaurant restaurant;
-	
-	public String exportToString()
-	{
-		return iD + '|' + articalName + '|' + price + '|' + articalType.toString() + '|' + quantity + '|' + description + '|' + picture + '|' + restaurant.getId(); 
-	}
-	
-	
-	public Artical(String iD, String articalName, double price, ArticalType articalType, String quantity,
-			String description, String picture, Restaurant restaurant) {
-		super();
-		this.iD = iD;
-		this.articalName = articalName;
-		this.price = price;
-		this.articalType = articalType;
-		this.quantity = quantity;
-		this.description = description;
-		this.picture = picture;
-		this.restaurant = restaurant;
-	}
-	public String getID() {
-		return iD;
-	}
-	public void setID(String iD) {
-		this.iD = iD;
-	}
+	private double quantity;
+	private String description;
+	private String articalImage;
+
 	public String getArticalName() {
 		return articalName;
 	}
@@ -47,41 +23,79 @@ public class Artical {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public ArticalType getArticalType() {
-		return articalType;
+	public Type getType() {
+		return type;
 	}
-	public void setArticalType(ArticalType articalType) {
-		this.articalType = articalType;
+	public void setType(Type type) {
+		this.type = type;
 	}
-	public String getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(String quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 	public String getDescription() {
 		return description;
 	}
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
-
-
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
-	}
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getPicture() {
-		return picture;
+	public String getArticalImage() {
+		return articalImage;
 	}
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setArticalImage(String articalImage) {
+		this.articalImage = articalImage;
 	}
 	
+	public Restaurant getRestaurant()
+	{
+		return restaurant;
+	}
 	
+	public void setRestaurant(Restaurant restaurant)
+	{
+		this.restaurant = restaurant;
+	}
 	
+	public String getArticalID() {
+		return articalID;
+	}
+	public void setArticalID(String articalID) {
+		this.articalID = articalID;
+	}
+	public Artical(String articalID, String articalName, double price, Type type, Restaurant restaurant ,double quantity, String description,
+			String articalImage) {
+		super();
+		this.articalID = articalID;
+		this.articalName = articalName;
+		this.price = price;
+		this.type = type;
+		this.quantity = quantity;
+		this.description = description;
+		this.articalImage = articalImage;
+		this.restaurant = restaurant;
+		
+	}
+	
+public Artical(String id, String articalName2, double price2, Type type2, String articalImage2, String description2,
+			double quantity2, Restaurant restaurant) {
+		articalID=id;
+		articalName=articalName2;
+		price=price2;
+		type=type2;
+		articalImage=articalImage2;
+		description=description2;
+		quantity=quantity2;
+		this.restaurant = restaurant;
+	}
+public Artical() {
+	// TODO Auto-generated constructor stub
+}
+public String ExportString() 
+	{
+		return articalID + "|" + articalName + "|" + price + "|" + type.toString() + "|" + restaurant.getRestaurantID() + "|" + quantity + "|" + description + "|" + articalImage;
+	}
+	
+
 }

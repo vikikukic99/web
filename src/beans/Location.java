@@ -1,69 +1,52 @@
 package beans;
 
-public class Location {
-
-	private String iD;
-	private double geograficalLenght;
-	private double geograficalWidth;
-	private String address;
-	private String city;
-	private String country;
-	
-	public String exportToString()
-	{
-		return iD + '|' + geograficalLenght + '|' + geograficalWidth + '|' + address + '|' + city + '|' + country; 
-	}
-	
-	public Location()
-	{
-		
-	}
-	public Location(String iD, double geograficalLenght, double geograficalWidth, String adress, String city, String country) {
+public class Location
+{
+	private String locationID;
+	private double geographicalLength;
+   	private double geographicalWidth;
+   	private String address;
+   
+   	
+   	
+public Location(String locationID, double geographicalLength, double geographicalWidth, String adress) {
 		super();
-		this.iD = iD;
-		this.geograficalLenght = geograficalLenght;
-		this.geograficalWidth = geograficalWidth;
+		this.locationID = locationID;
+		this.geographicalLength = geographicalLength;
+		this.geographicalWidth = geographicalWidth;
 		this.address = adress;
-		this.city = city;
-		this.country = country;
-	}
-	public String getiD() {
-		return iD;
-	}
-	public void setiD(String iD) {
-		this.iD = iD;
-	}
-	public double getGeograficalLenght() {
-		return geograficalLenght;
-	}
-	public void setGeograficalLenght(double geograficalLenght) {
-		this.geograficalLenght = geograficalLenght;
-	}
-	public double getGeograficalWidth() {
-		return geograficalWidth;
-	}
-	public void setGeograficalWidth(double geograficalWidth) {
-		this.geograficalWidth = geograficalWidth;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String adress) {
-		this.address = adress;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
-	
-	
+public double getGeographicalLength() {
+	return geographicalLength;
+}
+public void setGeographicalLength(double geographicalLength) {
+	this.geographicalLength = geographicalLength;
+}
+public double getGeographicalWidth() {
+	return geographicalWidth;
+}
+public String getLocationID() {
+	return locationID;
+}
+
+public void setLocationID(String locationID) {
+	this.locationID = locationID;
+}
+
+public void setGeographicalWidth(double geographicalWidth) {
+	this.geographicalWidth = geographicalWidth;
+}
+public String getAddress() {
+	return address;
+}
+public void setAddress(String address) {
+	this.address = address;
+}
+
+public String ExportString() 
+{
+	return locationID + "|" + geographicalLength + "|" + geographicalWidth + "|" + address;
+}
+
 }
